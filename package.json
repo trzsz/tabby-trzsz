@@ -1,7 +1,7 @@
 {
   "name": "tabby-trzsz",
-  "version": "0.1.0",
-  "description": "trzsz ( trz / tsz ), which similar to rz / sz, and compatible with tmux.",
+  "version": "0.1.1",
+  "description": "Supports trzsz ( trz / tsz ), which similar to rz / sz, and compatible with tmux.",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/trzsz/tabby-trzsz/issues"
   },
-  "homepage": "https://trzsz.github.io/",
+  "homepage": "https://trzsz.github.io",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
