@@ -12,6 +12,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "require-jsdoc": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-floating-promises": "error"

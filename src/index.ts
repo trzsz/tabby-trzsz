@@ -1,25 +1,9 @@
-import { NgModule, Injectable } from "@angular/core";
-import { ToolbarButtonProvider, ToolbarButton } from "tabby-core";
+import { NgModule } from "@angular/core";
+import { TerminalDecorator } from "tabby-terminal";
+import { TrzszDecorator } from "./decorator";
 
-@Injectable()
-export class MyButtonProvider extends ToolbarButtonProvider {
-  provide(): ToolbarButton[] {
-    return [
-      {
-        icon: "star",
-        title: "Foobar",
-        weight: 10,
-        click: () => {
-          alert("Woohoo!");
-        },
-      },
-    ];
-  }
-}
-
+// eslint-disable-next-line new-cap
 @NgModule({
-  providers: [
-    { provide: ToolbarButtonProvider, useClass: MyButtonProvider, multi: true },
-  ],
+  providers: [{ provide: TerminalDecorator, useClass: TrzszDecorator, multi: true }],
 })
-export default class MyModule {}
+export default class TrzszModule {}
