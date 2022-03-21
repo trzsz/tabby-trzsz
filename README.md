@@ -12,6 +12,9 @@
 ![tabby-trzsz plugin](https://trzsz.github.io/images/tabby_trzsz.png)
 
 
+* Install [trzsz](https://github.com/trzsz/trzsz) on the server.
+
+
 ## Screenshot
 
 * Using trzsz in tabby
