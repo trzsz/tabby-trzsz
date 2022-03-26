@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, filter } from "rxjs";
-import { HotkeysService } from "tabby-core";
+import { Observable } from "rxjs";
+import { filter } from "rxjs/operators";
+import { ConfigService, HotkeysService } from "tabby-core";
 import { TrzszSessionMiddleware } from "./middleware";
 import { ElectronHostWindow, ElectronService } from "tabby-electron";
 import { TerminalDecorator, BaseTerminalTabComponent } from "tabby-terminal";
@@ -10,6 +11,7 @@ export class TrzszDecorator extends TerminalDecorator {
   private cancelEvent: Observable<any>;
 
   constructor(
+    private config: ConfigService,
     hotkeys: HotkeysService,
     private hostWindow: ElectronHostWindow,
     private electron: ElectronService
@@ -19,24 +21,16 @@ export class TrzszDecorator extends TerminalDecorator {
   }
 
   attach(terminal: BaseTerminalTabComponent): void {
-    const middleware = new TrzszSessionMiddleware(
-      this.hostWindow,
-      this.electron,
-      terminal
-    );
+    const middleware = new TrzszSessionMiddleware(this.config, this.hostWindow, this.electron, terminal);
     setTimeout(() => {
       this.attachToSession(middleware, terminal);
       this.subscribeUntilDetached(
         terminal,
-        terminal.resize$.subscribe((size) =>
-          middleware.trzsz.setTerminalColumns(size.columns)
-        )
+        terminal.resize$.subscribe((size) => middleware.trzsz.setTerminalColumns(size.columns))
       );
       this.subscribeUntilDetached(
         terminal,
-        terminal.sessionChanged$.subscribe(() =>
-          this.attachToSession(middleware, terminal)
-        )
+        terminal.sessionChanged$.subscribe(() => this.attachToSession(middleware, terminal))
       );
       this.subscribeUntilDetached(
         terminal,

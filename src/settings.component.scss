@@ -1,0 +1,17 @@
+.trzsz-settings-tab {
+	width: 100%;
+	display: table;
+	border-spacing: 2px 20px;
+	.row {
+		width: 100%;
+		display: table-row;
+		.header {
+			width: 10em;
+			display: table-cell;
+		}
+		.form-control {
+			width: 100%;
+			display: table-cell;
+		}
+	}
+}

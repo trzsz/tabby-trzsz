@@ -1,0 +1,19 @@
+h3 Trzsz ( trz / tsz )
+
+div.trzsz-settings-tab
+	.row
+		.header
+			.title Default upload path:
+		input.form-control(
+			type='text', 
+			[(ngModel)]='config.store.trzszPlugin.defaultUploadPath', 
+			(ngModelChange)='config.save()',
+		)
+	.row
+		.header
+			.title Default download path:
+		input.form-control(
+			type='text', 
+			[(ngModel)]='config.store.trzszPlugin.defaultDownloadPath', 
+			(ngModelChange)='config.save()',
+		)

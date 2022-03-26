@@ -26,6 +26,11 @@ module.exports = {
           configFile: path.resolve(__dirname, "tsconfig.json"),
         },
       },
+      {
+        test: /\.scss$/,
+        use: ["@tabby-gang/to-string-loader", "css-loader", "sass-loader"],
+      },
+      { test: /\.pug$/, use: ["apply-loader", "pug-loader"] },
     ],
   },
   externals: ["fs", /^@angular/, /^tabby-/],
