@@ -1,0 +1,22 @@
+name: Publish tabby-trzsz to npmjs
+on:
+  release:
+    types: [released]
+jobs:
+  build-and-publish:
+    name: Build and publish tabby-trzsz to npmjs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tabby-trzsz
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install tabby-trzsz Dependencies
+        run: npm ci
+      - name: Publish tabby-trzsz to npmjs
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPMJS_TOKEN }}
