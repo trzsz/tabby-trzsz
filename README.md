@@ -15,6 +15,15 @@
 * Install [trzsz](https://github.com/trzsz/trzsz) on the server.
 
 
+## Configuration
+
+* If the `Default upload path` is not empty, the path will be opened by default while choosing upload files.
+
+* If the `Default download path` is not empty, downloading files will be saved to the path automatically instead of asking each time.
+
+![tabby-trzsz config](https://trzsz.github.io/images/tabby_config.png)
+
+
 ## Screenshot
 
 * Using trzsz in tabby

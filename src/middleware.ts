@@ -34,11 +34,9 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
         return result.filePaths;
       },
       chooseSaveDirectory: async () => {
-        if (
-          this.config.store.trzszPlugin.defaultDownloadPath &&
-          this.config.store.trzszPlugin.defaultDownloadPath.length
-        ) {
-          return this.config.store.trzszPlugin.defaultDownloadPath;
+        const defaultPath = this.config.store.trzszPlugin.defaultDownloadPath;
+        if (defaultPath && defaultPath.length) {
+          return defaultPath;
         }
         const result = await electron.dialog.showOpenDialog(hostWindow.getWindow(), {
           title: "Choose a folder to save file(s)",
