@@ -14,8 +14,8 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
   ) {
     super();
     this.trzsz = new TrzszFilter({
-      writeToTerminal: (data) => this.outputToTerminal.next(data),
-      sendToServer: (data) => this.outputToSession.next(data),
+      writeToTerminal: (data) => this.outputToTerminal.next(data as any),
+      sendToServer: (data) => this.outputToSession.next(data as any),
       terminalColumns: terminal.size.columns,
       chooseSendFiles: async () => {
         const result = await electron.dialog.showOpenDialog(hostWindow.getWindow(), {
@@ -63,6 +63,6 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
   }
 
   feedFromTerminal(data: Buffer): void {
-    this.trzsz.processTerminalInput(data);
+    this.trzsz.processTerminalInput(data as any);
   }
 }
