@@ -21,6 +21,8 @@
 
 * If the `Default download path` is not empty, downloading files will be saved to the path automatically instead of asking each time.
 
+* If you have `trz` on one of the `PATH` directory on the server, you can also enable drag files and directories to upload.
+
 ![tabby-trzsz config](https://trzsz.github.io/images/tabby_config.png)
 
 

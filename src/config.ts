@@ -5,6 +5,7 @@ export class TrzszConfigProvider extends ConfigProvider {
     trzszPlugin: {
       defaultUploadPath: "",
       defaultDownloadPath: "",
+      enableDragUpload: false,
     },
   };
 }

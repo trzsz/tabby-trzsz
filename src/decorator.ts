@@ -21,8 +21,21 @@ export class TrzszDecorator extends TerminalDecorator {
   }
 
   attach(terminal: BaseTerminalTabComponent): void {
-    const middleware = new TrzszSessionMiddleware(this.config, this.hostWindow, this.electron, terminal);
+    const isWindowsShell = process.platform === "win32" && (terminal as any).profile?.type === "local";
+    const middleware = new TrzszSessionMiddleware(
+      this.config,
+      this.hostWindow,
+      this.electron,
+      terminal,
+      isWindowsShell
+    );
     setTimeout(() => {
+      terminal.element.nativeElement.querySelector(".terminal").addEventListener("drop", (event) => {
+        if (this.config.store.trzszPlugin.enableDragUpload) {
+          event.stopPropagation();
+          middleware.trzsz.uploadFiles(event.dataTransfer.items).catch((err) => console.log(err));
+        }
+      });
       this.attachToSession(middleware, terminal);
       this.subscribeUntilDetached(
         terminal,

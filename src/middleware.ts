@@ -10,26 +10,32 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
     private config: ConfigService,
     hostWindow: ElectronHostWindow,
     electron: ElectronService,
-    terminal: BaseTerminalTabComponent
+    terminal: BaseTerminalTabComponent,
+    isWindowsShell: boolean
   ) {
     super();
     this.trzsz = new TrzszFilter({
       writeToTerminal: (data) => this.outputToTerminal.next(data as any),
       sendToServer: (data) => this.outputToSession.next(data as any),
       terminalColumns: terminal.size.columns,
-      chooseSendFiles: async () => {
+      isWindowsShell: isWindowsShell,
+      chooseSendFiles: async (directory) => {
+        const properties = [
+          "openFile",
+          "multiSelections",
+          "showHiddenFiles",
+          "noResolveAliases",
+          "treatPackageAsDirectory",
+          "dontAddToRecent",
+        ];
+        if (directory) {
+          properties.push("openDirectory");
+        }
         const result = await electron.dialog.showOpenDialog(hostWindow.getWindow(), {
           defaultPath: this.config.store.trzszPlugin.defaultUploadPath,
           title: "Choose some files to send",
           message: "Choose some files to send",
-          properties: [
-            "openFile",
-            "multiSelections",
-            "showHiddenFiles",
-            "noResolveAliases",
-            "treatPackageAsDirectory",
-            "dontAddToRecent",
-          ],
+          properties: properties,
         });
         return result.filePaths;
       },
