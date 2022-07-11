@@ -1,6 +1,6 @@
 {
   "name": "tabby-trzsz",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Supports trzsz ( trz / tsz ), which similar to rz / sz, and compatible with tmux.",
   "main": "dist/index.js",
   "files": [
@@ -56,6 +56,6 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "trzsz": "^0.4.0"
+    "trzsz": "^0.4.1"
   }
 }
