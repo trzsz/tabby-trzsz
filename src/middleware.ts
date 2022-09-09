@@ -15,8 +15,8 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
   ) {
     super();
     this.trzsz = new TrzszFilter({
-      writeToTerminal: (data) => this.outputToTerminal.next(data as any),
-      sendToServer: (data) => this.outputToSession.next(data as any),
+      writeToTerminal: (data) => super.feedFromSession(data as Buffer),
+      sendToServer: (data) => super.feedFromTerminal(data as Buffer),
       terminalColumns: terminal.size.columns,
       isWindowsShell: isWindowsShell,
       chooseSendFiles: async (directory) => {
