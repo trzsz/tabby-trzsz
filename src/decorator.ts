@@ -21,10 +21,10 @@ export class TrzszDecorator extends TerminalDecorator {
     this.cancelEvent = hotkeys.hotkey$.pipe(filter((x) => x === "ctrl-c"));
   }
 
-  attach(terminal: BaseTerminalTabComponent): void {
+  attach(terminal: BaseTerminalTabComponent<any>): void {
     const isWindowsShell = process.platform === "win32" && (terminal as any).profile?.type === "local";
     setTimeout(() => {
-      terminal.element.nativeElement.querySelector(".terminal").addEventListener("drop", (event) => {
+      terminal.element.nativeElement.querySelector(".terminal").addEventListener("drop", (event: any) => {
         if (this.config.store.trzszPlugin.enableDragUpload) {
           event.stopPropagation();
           if (this.middleware) {
@@ -56,7 +56,7 @@ export class TrzszDecorator extends TerminalDecorator {
     });
   }
 
-  private attachToSession(terminal, isWindowsShell) {
+  private attachToSession(terminal: BaseTerminalTabComponent<any>, isWindowsShell: boolean) {
     if (!terminal.session) {
       return;
     }

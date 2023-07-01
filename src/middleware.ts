@@ -10,7 +10,7 @@ export class TrzszSessionMiddleware extends SessionMiddleware {
     private config: ConfigService,
     hostWindow: ElectronHostWindow,
     electron: ElectronService,
-    terminal: BaseTerminalTabComponent,
+    terminal: BaseTerminalTabComponent<any>,
     isWindowsShell: boolean
   ) {
     super();
