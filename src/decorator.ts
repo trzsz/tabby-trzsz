@@ -9,7 +9,6 @@ import { TerminalDecorator, BaseTerminalTabComponent } from "tabby-terminal";
 @Injectable() // eslint-disable-line new-cap
 export class TrzszDecorator extends TerminalDecorator {
   private cancelEvent: Observable<any>;
-  private middleware: TrzszSessionMiddleware;
 
   constructor(
     private config: ConfigService,
@@ -27,8 +26,8 @@ export class TrzszDecorator extends TerminalDecorator {
       terminal.element.nativeElement.querySelector(".terminal").addEventListener("drop", (event: any) => {
         if (this.config.store.trzszPlugin.enableDragUpload) {
           event.stopPropagation();
-          if (this.middleware) {
-            this.middleware.trzsz.uploadFiles(event.dataTransfer.items).catch((err) => console.log(err));
+          if ((terminal as any).trzsz) {
+            (terminal as any).trzsz.uploadFiles(event.dataTransfer.items).catch((err: any) => console.log(err));
           }
         }
       });
@@ -36,8 +35,8 @@ export class TrzszDecorator extends TerminalDecorator {
       this.subscribeUntilDetached(
         terminal,
         terminal.resize$.subscribe((size) => {
-          if (this.middleware) {
-            this.middleware.trzsz.setTerminalColumns(size.columns);
+          if ((terminal as any).trzsz) {
+            (terminal as any).trzsz.setTerminalColumns(size.columns);
           }
         })
       );
@@ -48,8 +47,8 @@ export class TrzszDecorator extends TerminalDecorator {
       this.subscribeUntilDetached(
         terminal,
         this.cancelEvent.subscribe(() => {
-          if (terminal.hasFocus && this.middleware) {
-            this.middleware.trzsz.stopTransferringFiles();
+          if (terminal.hasFocus && (terminal as any).trzsz) {
+            (terminal as any).trzsz.stopTransferringFiles();
           }
         })
       );
@@ -60,7 +59,14 @@ export class TrzszDecorator extends TerminalDecorator {
     if (!terminal.session) {
       return;
     }
-    this.middleware = new TrzszSessionMiddleware(this.config, this.hostWindow, this.electron, terminal, isWindowsShell);
-    terminal.session.middleware.push(this.middleware);
+    const middleware = new TrzszSessionMiddleware(
+      this.config,
+      this.hostWindow,
+      this.electron,
+      terminal,
+      isWindowsShell
+    );
+    terminal.session.middleware.push(middleware);
+    (terminal as any).trzsz = middleware.trzsz;
   }
 }
