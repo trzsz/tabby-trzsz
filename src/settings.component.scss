@@ -1,22 +1,23 @@
 .trzsz-settings-tab {
-	.trzsz-table {
-		width: 100%;
-		display: table;
-		border-spacing: 2px 20px;
-		.row {
-			width: 100%;
-			display: table-row;
-			.header {
-				width: 10em;
-				display: table-cell;
-			}
-			.form-control {
-				width: 100%;
-				display: table-cell;
-			}
-		}
-	}
-	.form-line {
-		max-width: 500px;
-	}
+  .trzsz-table {
+    width: 100%;
+    display: table;
+    border-spacing: 0px 20px;
+    .row {
+      width: 100%;
+      display: table-row;
+      .header {
+        padding: 0;
+        width: 10em;
+        display: table-cell;
+      }
+      .form-control {
+        width: 100%;
+        display: table-cell;
+      }
+    }
+  }
+  .form-line {
+    max-width: 600px;
+  }
 }
